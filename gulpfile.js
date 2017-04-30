@@ -18,6 +18,10 @@ gulp.task('watch', function() {
   gulp.watch(paths.src + '/**/*.js', ['scripts']);
 })
 
-gulp.task('default', function() {
-  runSequence(['styles', 'scripts'], ['watch'])
+gulp.task('dev', function() {
+  runSequence(['build'], ['watch'])
+});
+
+gulp.task('build', function() {
+  runSequence(['styles', 'scripts']);
 });

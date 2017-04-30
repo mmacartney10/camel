@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node website.js"
+    "postinstall": "gulp build", 
+    "start": "node website.js",
+    "serve": "node website.js",
+    "dev": "gulp dev"
   },
   "keywords": [],
   "author": "",
