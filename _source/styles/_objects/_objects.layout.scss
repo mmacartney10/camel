@@ -1,0 +1,60 @@
+// Objects - layout
+
+.wrapper {
+	padding: 35px 0;
+
+	@include respond-to-min($bp-medium) {
+		padding: 50px 0;
+	}
+}
+
+.inner {
+	max-width: 848px;
+	padding: 0 24px;
+	margin: 0 auto;
+
+	@include respond-to-min($bp-medium) {
+		@supports(display: flex) {
+			display: flex;
+		}
+	}
+
+	&:after {
+		content: '';
+		display: block;
+		clear: both;
+
+		@supports(display: flex) {
+			display: none;
+		}
+	}
+}
+
+.col {
+	width: 100%;
+  display: inline-block;
+
+	float: left;
+
+	&:nth-child(n+2) {
+		padding-left: 16px;
+	}
+
+	@supports(display: flex) {
+		float: none;
+
+		&:nth-child(n+2) {
+			padding-left: 0;
+
+			@include respond-to-min($bp-medium) {
+				padding-left: 16px;
+			}
+		}
+	}
+}
+
+@include widths(12);
+
+@include respond-to-min($bp-medium) {
+  @include widths(12, '--md');
+}

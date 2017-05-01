@@ -1,0 +1,14 @@
+// Styles for webcam partial
+
+.webcam {
+  background: $c-black;
+}
+
+.webcam__video {
+  width: 100%;
+  display: block;
+}
+
+.webcam__canvas {
+  display: none;
+}

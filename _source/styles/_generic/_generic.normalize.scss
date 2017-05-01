@@ -14,6 +14,18 @@ html {
   -webkit-text-size-adjust: 100%; /* 2 */
 }
 
+html {
+  box-sizing: border-box;
+}
+
+* {
+  &,
+  &:before,
+  &:after {
+    box-sizing: inherit;
+  }
+}
+
 /**
  * Remove default margin.
  */
@@ -442,5 +454,5 @@ table, th, td, caption,
 hr {
     margin:  0;
     padding: 0;
-    
+
 }

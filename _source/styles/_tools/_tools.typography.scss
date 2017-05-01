@@ -1,0 +1,14 @@
+// Font declarations and settings
+
+@mixin font($name, $file, $weight: normal) {
+  @font-face {
+    font-family: $name;
+    src: url($fontUrl + $file + '.eot');
+    src: url($fontUrl + $file + '.eot?#iefix') format('embedded-opentype'),
+      url($fontUrl + $file + '.woff') format('woff'),
+      url($fontUrl + $file + '.ttf') format('truetype'),
+      url($fontUrl + $file + '#' + $name) format('svg');
+    font-weight: $weight;
+    font-style: normal;
+  }
+}

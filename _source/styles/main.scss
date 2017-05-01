@@ -1,11 +1,41 @@
-@import './_settings.colors.scss';
-@import './_settings.global.scss';
-@import './_settings.layout.scss';
-@import './_tools.functions.scss';
-@import './_tools.mixins.scss';
-@import './_tools.typography.scss';
-@import './_generic.normalize.scss';
-@import './_generic.box-sizing.scss';
-@import './_elements.links.scss';
-@import './_objects.layout.scss';
-@import './_objects.styleguide.scss';
+/* ============================================================ *\
+
+  #MAIN
+
+
+/* ============================================================ */
+
+/**
+* CONTENTS
+* 
+* _SETTINGS
+*  Variables for colors
+*  Global variables
+* 
+* _TOOLS
+*  Tools - Common Sass mixins
+*  Font declarations and settings
+* 
+* _GENERIC
+* Normalize - sets all elements to a common state regardless of browser.
+* 
+* _OBJECTS
+*  Objects - layout
+* Styleguide layout and filler styles.
+* 
+* WEBCAM
+*  Styles for webcam partial
+*
+*/
+
+
+
+
+@import "/Users/matthewmacartney/Development/Personal/camel/_source/styles/_settings/_settings.colors.scss";
+@import "/Users/matthewmacartney/Development/Personal/camel/_source/styles/_settings/_settings.global.scss";
+@import "/Users/matthewmacartney/Development/Personal/camel/_source/styles/_tools/_tools.mixins.scss";
+@import "/Users/matthewmacartney/Development/Personal/camel/_source/styles/_tools/_tools.typography.scss";
+@import "/Users/matthewmacartney/Development/Personal/camel/_source/styles/_generic/_generic.normalize.scss";
+@import "/Users/matthewmacartney/Development/Personal/camel/_source/styles/_objects/_objects.layout.scss";
+@import "/Users/matthewmacartney/Development/Personal/camel/_source/styles/_objects/_objects.styleguide.scss";
+@import "/Users/matthewmacartney/Development/Personal/camel/views/_partials/webcam/webcam.scss";
