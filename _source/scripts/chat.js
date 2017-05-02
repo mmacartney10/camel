@@ -77,12 +77,15 @@
     }
 
     var clientMessage = {
-      id: userId,
+      id: MESSAGE_userIdYou,
       message: chatMessageText,
       userJoin: false
     }
 
     appendChatMessageToChat(clientMessage);
+
+    clientMessage.id = userId;
+
     socket.emit('client:chatMessage', clientMessage);
   }
 

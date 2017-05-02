@@ -1,10 +1,12 @@
 // Styles for chat component
 
 .chat {
-  height: 180px;
+  height: 135px;
   overflow: scroll;
+  margin-top: 12px;
 
   @include respond-to-min($bp-medium) {
+    margin-top: 0;
     height: 450px;
   }
 }
@@ -46,7 +48,17 @@
 .chat-form {
   width: 100%;
   display: flex;
-  margin-top: 24px;
+  margin-top: 12px;
+
+  position: fixed;
+  left: 0;
+  bottom: 0;
+
+  @include respond-to-min($bp-medium) {
+    margin-top: 24px;
+
+    position: static;
+  }
 }
 
 .chat-form__fieldset {
@@ -56,19 +68,26 @@
 .chat-form__input {
   background-color: #CFD9E0;
   width: 100%;
-  padding: 29px 25px 30px;
+  padding: 29px 12px 30px;
   border: 0;
-  border-radius: 25px 0 0 25px;
+
+  @include respond-to-min($bp-medium) {
+    border-radius: 25px 0 0 25px;
+    padding: 29px 25px 30px;
+  }
 }
 
 .chat-form__button {
   background-color: #DA5256;
   width: 25%;
   margin: 0;
-  padding: 29px 25px 30px;
+  padding: 29px 12px 30px;
   border: 0;
-  border-radius: 0 25px 25px 0;
   color: #FFF;
+
+  @include respond-to-min($bp-medium) {
+    border-radius: 0 25px 25px 0;
+  }
 
   &:hover {
     background-color: #af484b;
