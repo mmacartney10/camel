@@ -9,6 +9,10 @@
   var ELEMENT_chatSend = document.querySelector(SELECTOR_chatSend);
 
   var CLASS_chatMessage = 'chat__message';
+  var CLASS_chatJoin = 'chat__join';
+
+  var MESSAGE_userJoined = ' have joined';
+  var MESSAGE_userIdYou = 'You';
 
   var userId = null;
 
@@ -23,19 +27,61 @@
     chatMessage.appendChild(userId);
     chatMessage.appendChild(message);
 
-    chatMessage.className = CLASS_chatMessage;
+    chatMessage.className = clientMessage.userJoin ? CLASS_chatJoin : CLASS_chatMessage;
 
     ELEMENT_chat.appendChild(chatMessage);
-
     ELEMENT_chat.scrollTop = ELEMENT_chat.scrollHeight;
   }
 
-  function guidGenerator() {
-    var S4 = function() {
-      return (((1+Math.random())*0x10000)|0).toString(8).substring(1);
-    };
+  function setUserId(data) {
+    userId = data.userId;
+    socket.emit('client:userHasConnected', userId);
+  }
 
-    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+  function populateChatWithPreviousMessages(data) {
+    for (var index = 0; index < data.chatHistory.length; index++) {
+      var clientMessage = data.chatHistory[index];
+      appendChatMessageToChat(clientMessage);
+    }
+  }
+
+  function getChatMessage() {
+    var chatMessageText = ELEMENT_chatMessage.value;
+    ELEMENT_chatMessage.value = '';
+    return chatMessageText;
+  }
+
+  function appendUserJoinedMessage() {
+    var clientMessage = {
+      id: MESSAGE_userIdYou,
+      message: MESSAGE_userJoined,
+      userJoin: true
+    }
+
+    appendChatMessageToChat(clientMessage);
+  }
+
+  function handleClientConnectedToChat(data) {
+    setUserId(data);
+    populateChatWithPreviousMessages(data);
+    appendUserJoinedMessage();
+  }
+
+  function handleChatSend(event) {
+    var chatMessageText = getChatMessage();
+
+    if (chatMessageText === '') {
+      return;
+    }
+
+    var clientMessage = {
+      id: userId,
+      message: chatMessageText,
+      userJoin: false
+    }
+
+    appendChatMessageToChat(clientMessage);
+    socket.emit('client:chatMessage', clientMessage);
   }
 
   function init() {
@@ -44,39 +90,9 @@
     }
 
     socket.emit('client:connectedToChat', {});
-
-    socket.on('server:connectedToChat', function(data) {
-
-      userId = data.userId;
-
-      for (var index = 0; index < data.chatHistory.length; index++) {
-        var clientMessage = data.chatHistory[index];
-        appendChatMessageToChat(clientMessage);
-      }
-    });
-
-    ELEMENT_chatSend.onclick = function(event) {
-      var chatMessageText = ELEMENT_chatMessage.value;
-      ELEMENT_chatMessage.value = '';
-
-      if (chatMessageText === '') {
-        return;
-      }
-
-      var clientMessage = {
-        id: userId,
-        message: chatMessageText
-      }
-
-      appendChatMessageToChat(clientMessage);
-
-      socket.emit('client:chatMessage', clientMessage);
-    }
-
-    socket.on('server:chatMessage', function(clientMessage) {
-      appendChatMessageToChat(clientMessage);
-    });
-
+    socket.on('server:connectedToChat', handleClientConnectedToChat);
+    socket.on('server:chatMessage', appendChatMessageToChat);
+    ELEMENT_chatSend.onclick = handleChatSend;
   }
 
   init();

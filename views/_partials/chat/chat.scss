@@ -3,7 +3,7 @@
 .chat {
   height: 180px;
   overflow: scroll;
-  border: 2px solid #000;
+  border: 2px solid $c-black;
   padding: 5px;
 
   @include respond-to-min($bp-medium) {
@@ -14,6 +14,12 @@
 
 .chat__message {
   padding: 5px 0;
+}
+
+.chat__join {
+  padding: 5px;
+  background: $c-grey;
+  text-align: center;
 }
 
 .chat-form {
