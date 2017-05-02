@@ -1,17 +1,21 @@
 // Objects - layout
 
 .wrapper {
-	padding: 35px 0;
+	padding: 12px 0;
 
 	@include respond-to-min($bp-medium) {
-		padding: 50px 0;
+		padding: 24px 0;
 	}
 }
 
 .inner {
-	max-width: 848px;
-	padding: 0 24px;
+	max-width: 1200px;
+	padding: 0 12px;
 	margin: 0 auto;
+
+	@include respond-to-min($bp-small) {
+		padding: 0 24px;
+	}
 
 	@include respond-to-min($bp-medium) {
 		@supports(display: flex) {

@@ -36,6 +36,13 @@
     }
 }
 
+@function gcd($a, $b) {
+  @if $b == 0 {
+    @return $a;
+  }
+  @return gcd($b, $a % $b);
+}
+
 @mixin widths($cols, $modifier: "") {
   @for $i from 1 through $cols - 1 {
     $gcd: gcd($i, $cols);

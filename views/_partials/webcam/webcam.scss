@@ -1,12 +1,19 @@
 // Styles for webcam partial
 
 .webcam {
-  background: $c-black;
+  background-color: $c-black;
+  height: 320px;
+  display: flex;
+
+  @include respond-to-min($bp-small) {
+    height: 450px;
+  }
 }
 
 .webcam__video {
   width: 100%;
   display: block;
+  transform: rotateY(180deg);
 }
 
 .webcam__canvas {

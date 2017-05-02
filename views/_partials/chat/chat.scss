@@ -1,0 +1,41 @@
+// Styles for chat component
+
+.chat {
+  height: 180px;
+  overflow: scroll;
+  border: 2px solid #000;
+  padding: 5px;
+
+  @include respond-to-min($bp-medium) {
+    height: 450px;
+    border: 0;
+  }
+}
+
+.chat__message {
+  padding: 5px 0;
+}
+
+.chat-form {
+  width: 100%;
+  display: flex;
+}
+
+.chat-form__fieldset {
+  width: 75%;
+}
+
+.chat-form__input {
+  background-color: yellowgreen;
+  width: 100%;
+  padding: 10px 15px 9px;
+  border: 0;
+}
+
+.chat-form__button {
+  background-color: tomato;
+  width: 25%;
+  margin: 0;
+  padding: 10px 15px 9px;
+  border: 0;
+}

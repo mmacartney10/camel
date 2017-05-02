@@ -15,6 +15,7 @@
 * _TOOLS
 *  Tools - Common Sass mixins
 *  Font declarations and settings
+*  Tools - Utils
 * 
 * _GENERIC
 * Normalize - sets all elements to a common state regardless of browser.
@@ -22,6 +23,9 @@
 * _OBJECTS
 *  Objects - layout
 * Styleguide layout and filler styles.
+* 
+* CHAT
+*  Styles for chat component
 * 
 * WEBCAM
 *  Styles for webcam partial
@@ -35,7 +39,9 @@
 @import "/Users/matthewmacartney/Development/Personal/camel/_source/styles/_settings/_settings.global.scss";
 @import "/Users/matthewmacartney/Development/Personal/camel/_source/styles/_tools/_tools.mixins.scss";
 @import "/Users/matthewmacartney/Development/Personal/camel/_source/styles/_tools/_tools.typography.scss";
+@import "/Users/matthewmacartney/Development/Personal/camel/_source/styles/_tools/_tools.utils.scss";
 @import "/Users/matthewmacartney/Development/Personal/camel/_source/styles/_generic/_generic.normalize.scss";
 @import "/Users/matthewmacartney/Development/Personal/camel/_source/styles/_objects/_objects.layout.scss";
 @import "/Users/matthewmacartney/Development/Personal/camel/_source/styles/_objects/_objects.styleguide.scss";
+@import "/Users/matthewmacartney/Development/Personal/camel/views/_partials/chat/chat.scss";
 @import "/Users/matthewmacartney/Development/Personal/camel/views/_partials/webcam/webcam.scss";
