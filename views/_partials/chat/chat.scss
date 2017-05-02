@@ -3,28 +3,50 @@
 .chat {
   height: 180px;
   overflow: scroll;
-  border: 2px solid $c-black;
-  padding: 5px;
 
   @include respond-to-min($bp-medium) {
     height: 450px;
-    border: 0;
   }
 }
 
+@keyframes pop {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
 .chat__message {
-  padding: 5px 0;
+  background-color: #D7D7DD;
+  margin-bottom: 10px;
+  padding: 7px;
+  transform: scale(1);
+  animation: .4s pop ease-out;
+
+  &:nth-child(2n) {
+    background-color: #AACADE;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .chat__join {
-  padding: 5px;
-  background: $c-grey;
-  text-align: center;
+  background-color: #DA5256;
+  margin-bottom: 10px;
+  padding: 7px;
+  transform: scale(1);
+  animation: .4s pop ease-out;
+  color: #FFF;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .chat-form {
   width: 100%;
   display: flex;
+  margin-top: 24px;
 }
 
 .chat-form__fieldset {
@@ -32,16 +54,23 @@
 }
 
 .chat-form__input {
-  background-color: yellowgreen;
+  background-color: #CFD9E0;
   width: 100%;
-  padding: 10px 15px 9px;
+  padding: 29px 25px 30px;
   border: 0;
+  border-radius: 25px 0 0 25px;
 }
 
 .chat-form__button {
-  background-color: tomato;
+  background-color: #DA5256;
   width: 25%;
   margin: 0;
-  padding: 10px 15px 9px;
+  padding: 29px 25px 30px;
   border: 0;
+  border-radius: 0 25px 25px 0;
+  color: #FFF;
+
+  &:hover {
+    background-color: #af484b;
+  }
 }

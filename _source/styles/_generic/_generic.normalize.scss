@@ -459,3 +459,11 @@ hr {
 fieldset {
   border: 0;
 }
+
+input {
+  &:hover,
+  &:focus,
+  &:active {
+    outline: 0;
+  }
+}

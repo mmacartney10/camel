@@ -3,10 +3,12 @@
   var SELECTOR_chat = '[data-chat]';
   var SELECTOR_chatMessage = '[data-chat-message]';
   var SELECTOR_chatSend = '[data-chat-send]';
+  var SELECTOR_chatForm = '[data-chat-form]';
 
   var ELEMENT_chat = document.querySelector(SELECTOR_chat);
   var ELEMENT_chatMessage = document.querySelector(SELECTOR_chatMessage);
   var ELEMENT_chatSend = document.querySelector(SELECTOR_chatSend);
+  var ELEMENT_chatForm = document.querySelector(SELECTOR_chatForm);
 
   var CLASS_chatMessage = 'chat__message';
   var CLASS_chatJoin = 'chat__join';
@@ -84,6 +86,11 @@
     socket.emit('client:chatMessage', clientMessage);
   }
 
+  function handleChatFormSubmit(event) {
+    event.preventDefault();
+    handleChatSend(event)
+  }
+
   function init() {
     if (ELEMENT_chat === null) {
       return
@@ -93,6 +100,7 @@
     socket.on('server:connectedToChat', handleClientConnectedToChat);
     socket.on('server:chatMessage', appendChatMessageToChat);
     ELEMENT_chatSend.onclick = handleChatSend;
+    ELEMENT_chatForm.onsubmit = handleChatFormSubmit;
   }
 
   init();
