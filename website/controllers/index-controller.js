@@ -1,12 +1,23 @@
 var IndexController = function() {
 
+  var modelService = require('../services/model-service.js');
+
   return {
-    get: function(request, response) {
-      response.render('index');
+    home: function(request, response, io) {
+      var modelList = modelService.modelList();
+      // console.log('modelList', JSON.stringify(modelList));
+      response.render('index', {modelList: modelList});
     },
 
-    video: function(request, response) {
-      response.render('video');
+    client: function(request, response, io) {
+
+      var roomId = request.params.modelId;
+
+      io.on('connection', function(socket) {
+        socket.join(roomId);
+      });
+
+      response.render('client');
     }
   }
 };

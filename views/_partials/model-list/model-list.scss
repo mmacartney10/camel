@@ -1,0 +1,14 @@
+// Styles for model list component
+
+.model-list {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.model-list__item {
+  padding: 20px;
+  background: yellowgreen;
+  border: 1px solid black;
+  color: #FFF;
+}

@@ -17,7 +17,11 @@
     }
   }
 
-
+  function getRoomId() {
+    var pathList = window.location.pathname.split('/');
+    var pathListLastItem = pathList.length - 1;
+    return pathList[pathListLastItem];
+  }
 
   function drawMediaStream() {
     var context = ELEMENT_canvas.getContext('2d');
@@ -26,9 +30,19 @@
     context.width = ELEMENT_canvas.width;
     context.height = ELEMENT_canvas.height;
 
+    var webcamId = getRoomId();
+
     setInterval(function() {
       context.drawImage(ELEMENT_video, 0, 0, videoWidth, videoHeight);
-      socket.emit('client:mediaStream', ELEMENT_canvas.toDataURL('image/webp', 0.5));
+
+      var mediaStreamData = {
+        id: webcamId,
+        mediaStream: ELEMENT_canvas.toDataURL('image/webp', 0.5)
+      }
+
+      console.log('should emit');
+
+      socket.emit('client:mediaStream', mediaStreamData);
     }, 70);
   }
 
@@ -55,6 +69,10 @@
     }
 
     createMediaStream();
+
+    // setInterval(function() {
+    //   socket.emit('client:test', getRoomId());
+    // }, 1000);
   }
 
   webcamInit();

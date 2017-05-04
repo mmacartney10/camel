@@ -20,7 +20,7 @@ website.set('views', path.join(__dirname, 'views'));
 website.set('view engine', 'hbs');
 website.use(express.static(path.join(__dirname, '_client')));
 
-require('./router')(website);
+require('./router')(website, io);
 require('./website/socket').init(io);
 
 http.listen(port, function () {

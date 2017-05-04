@@ -1,12 +1,59 @@
 // Styles for webcam partial
 
+@keyframes sway {
+  0% { left: 50%; top: 60%; }
+  8% { left: 54%; top: 50%; }
+  16% { left: 58%; top: 40%; }
+  24% { left: 62%; top: 50%; }
+  32% { left: 58%; top: 60%; }
+  40% { left: 54%; top: 50%; }
+  48% { left: 50%; top: 40%; }
+  56% { left: 46%; top: 50%; }
+  64% { left: 42%; top: 60%; }
+  72% { left: 38%; top: 50%; }
+  80% { left: 42%; top: 40%; }
+  88% { left: 46%; top: 50%; }
+  100% { left: 50%; top: 60%; }
+}
+
 .webcam {
-  background-color: $c-black;
+  background-color: #191F26;
   height: 320px;
   display: flex;
+  overflow: hidden;
+  position: relative;
 
   @include respond-to-min($bp-small) {
     height: 450px;
+  }
+
+  &:before {
+    content: 'Loading...';
+    background-color: #DA5256;
+    width: calc(24% + 20px);
+    height: calc(20% + 20px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFF;
+    text-align: center;
+    padding-top: 20px;
+    border-radius: 4px;
+  }
+
+  &:after {
+    content: '';
+    background-color: #FFF;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    transition: all 0.3s;
+    animation: 5s sway linear infinite;
   }
 }
 
@@ -14,6 +61,16 @@
   width: 100%;
   display: block;
   transform: rotateY(180deg);
+  position: relative;
+  z-index: 1;
+}
+
+.webcam__image {
+  margin: 0 auto;
+  display: block;
+  transform: rotateY(180deg);
+  position: relative;
+  z-index: 1;
 }
 
 .webcam__canvas {
