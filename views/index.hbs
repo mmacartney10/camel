@@ -1,3 +1,7 @@
 <a href="/create-model">Create model</a>
 
-{{> model-list/model-list modelList=modelList}}
+{{#if noModelsFound}}
+  <h1>{{noModelsFound}}</h1>
+{{else}}
+  {{> model-list/model-list modelList=modelList}}
+{{/ if}}

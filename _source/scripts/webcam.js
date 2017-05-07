@@ -9,6 +9,8 @@
   var videoWidth = 640;
   var videoHeight = 480;
 
+  var modelId = '';
+
   var webCamConstraints = {
     audio: false,
     video: {
@@ -17,7 +19,7 @@
     }
   }
 
-  function getRoomId() {
+  function getModelId() {
     var pathList = window.location.pathname.split('/');
     var pathListLastItem = pathList.length - 1;
     return pathList[pathListLastItem];
@@ -30,17 +32,17 @@
     context.width = ELEMENT_canvas.width;
     context.height = ELEMENT_canvas.height;
 
-    var webcamId = getRoomId();
+    emitMediaStreamToServer(context, ELEMENT_canvas);
+  }
 
+  function emitMediaStreamToServer(context, ELEMENT_canvas) {
     setInterval(function() {
       context.drawImage(ELEMENT_video, 0, 0, videoWidth, videoHeight);
 
       var mediaStreamData = {
-        id: webcamId,
-        mediaStream: ELEMENT_canvas.toDataURL('image/webp', 0.5)
+        modelId: modelId,
+        mediaStream: ELEMENT_canvas.toDataURL('image/webp', 0.1)
       }
-
-      console.log('should emit');
 
       socket.emit('client:mediaStream', mediaStreamData);
     }, 70);
@@ -68,11 +70,9 @@
       return;
     }
 
+    modelId = getModelId();
+    socket.emit('client:modelConnected', modelId);
     createMediaStream();
-
-    // setInterval(function() {
-    //   socket.emit('client:test', getRoomId());
-    // }, 1000);
   }
 
   webcamInit();

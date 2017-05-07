@@ -1,7 +1,7 @@
 (function(window, undefined) {
 
   function showModelList(modelList) {
-    console.log(modelList);
+
   }
 
   function init() {

@@ -1,6 +1,6 @@
-var ModelController = function() {
+var modelService = require('../services/model-service.js');
 
-  var modelService = require('../services/model-service.js');
+var ModelController = function() {
 
   function guidGenerator() {
     var S4 = function() {
@@ -11,18 +11,30 @@ var ModelController = function() {
     return Promise.resolve(guid);
   }
 
+  function renderErrorPage(response, errorMessage) {
+    console.error(errorMessage);
+    response.render('error', {error: errorMessage});
+  }
+
   return {
-    model: function(request, response, io) {
-      response.render('model');
+    model: function(request, response) {
+
+      var modelId = request.params.modelId;
+
+      return modelService.addModel(modelId).then(function(data) {
+        return response.render('model');
+      }).catch(function(error) {
+        return renderErrorPage(response, error);
+      });
     },
 
-    createModel: function(request, response, io) {
+    createModel: function(request, response) {
       return guidGenerator().then(function(modelId) {
-        return modelService.add(modelId, io);
+        return modelService.checkIfModelExists(modelId);
       }).then(function(modelId) {
         return response.redirect(`/model/${modelId}`);
       }).catch(function(error) {
-        console.error(error);
+        return renderErrorPage(response, error);
       });
     }
   }

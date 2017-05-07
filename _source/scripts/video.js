@@ -7,7 +7,7 @@
     ELEMENT_image.src = data;
   }
 
-  function getRoomId() {
+  function getModelId() {
     var pathList = window.location.pathname.split('/');
     var pathListLastItem = pathList.length - 1;
     return pathList[pathListLastItem];
@@ -18,22 +18,13 @@
       return
     }
 
-    var roomId = getRoomId();
+    var modelId = getModelId();
 
-    // socket.on('connect', function() {
-    //   console.log('join room', roomId);
-    //   socket.emit('room', roomId);
-    // });
-
-    socket.emit('client:joinRoom', roomId);
+    socket.emit('client:joinRoom', modelId);
 
     socket.on('server:connectedToRoom', function(mediaStreamId) {
-      console.log('Room: ', mediaStreamId);
-    });
 
-    // socket.on('server:test', function(data) {
-    //   console.log('server:test', data);
-    // });
+    });
 
     socket.on('server:mediaStream', displayMediaStream);
   }

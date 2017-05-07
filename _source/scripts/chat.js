@@ -16,7 +16,14 @@
   var MESSAGE_userJoined = ' have joined';
   var MESSAGE_userIdYou = 'You';
 
-  var userId = null;
+  var userId = '';
+  var modelId = '';
+
+  function setModelId() {
+    var pathList = window.location.pathname.split('/');
+    var pathListLastItem = pathList.length - 1;
+    modelId = pathList[pathListLastItem];
+  }
 
   function appendChatMessageToChat(clientMessage) {
     var chatMessage = document.createElement('p');
@@ -37,7 +44,6 @@
 
   function setUserId(data) {
     userId = data.userId;
-    socket.emit('client:userHasConnected', userId);
   }
 
   function populateChatWithPreviousMessages(data) {
@@ -76,17 +82,18 @@
       return;
     }
 
-    var clientMessage = {
-      id: MESSAGE_userIdYou,
-      message: chatMessageText,
-      userJoin: false
+    var chatMessageData = {
+      modelId: modelId,
+      clientMessage: {
+        id: MESSAGE_userIdYou,
+        message: chatMessageText,
+        userJoin: false
+      }
     }
 
-    appendChatMessageToChat(clientMessage);
-
-    clientMessage.id = userId;
-
-    socket.emit('client:chatMessage', clientMessage);
+    appendChatMessageToChat(chatMessageData.clientMessage);
+    chatMessageData.clientMessage.id = userId;
+    socket.emit('client:chatMessage', chatMessageData);
   }
 
   function handleChatFormSubmit(event) {
@@ -99,9 +106,12 @@
       return
     }
 
-    socket.emit('client:connectedToChat', {});
+    setModelId();
+
+    socket.emit('client:connectedToChat', modelId);
     socket.on('server:connectedToChat', handleClientConnectedToChat);
     socket.on('server:chatMessage', appendChatMessageToChat);
+
     ELEMENT_chatSend.onclick = handleChatSend;
     ELEMENT_chatForm.onsubmit = handleChatFormSubmit;
   }
